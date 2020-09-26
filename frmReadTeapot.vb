@@ -17,6 +17,7 @@ Public Class frmReadTeapot
             HttpWebRequest)
          response = DirectCast(request.GetResponse(), HttpWebResponse)
          reader = New StreamReader(response.GetResponseStream())
+         'this is a comment
 
          RawResponse = reader.ReadToEnd()
          RawResponse = RawResponse
