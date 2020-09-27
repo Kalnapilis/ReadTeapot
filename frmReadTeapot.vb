@@ -2,6 +2,8 @@
 Option Explicit On
 Imports System.IO
 Imports System.Net
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 
 Public Class frmReadTeapot
    Private Sub frmReadTeapot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -9,6 +11,7 @@ Public Class frmReadTeapot
       Dim response As HttpWebResponse = Nothing
       Dim reader As StreamReader
       Dim RawResponse As String
+      Dim jO As Object
 
       Try
 
@@ -17,11 +20,11 @@ Public Class frmReadTeapot
             HttpWebRequest)
          response = DirectCast(request.GetResponse(), HttpWebResponse)
          reader = New StreamReader(response.GetResponseStream())
-         'this is a comment
 
          RawResponse = reader.ReadToEnd()
          RawResponse = RawResponse
 
+         jO = JObject.Parse(RawResponse)
 
       Catch ex As Exception
          Console.WriteLine(ex.ToString)
