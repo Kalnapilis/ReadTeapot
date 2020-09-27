@@ -27,6 +27,12 @@ Public Class frmReadTeapot
 
          jsonObject = Newtonsoft.Json.Linq.JObject.Parse(RawResponse)
          jsonArray = CType(jsonObject("obs"), JArray)
+         'string jsonFormatted = JValue.Parse(json).ToString(Formatting.Indented)
+
+         Dim o1 As JObject 'https://www.newtonsoft.com/json/help/html/QueryJson.htm
+         o1 = jsonObject("status")
+         Dim sm As String
+         sm = o1("status_message")
 
          For Each item As JObject In jsonArray
             Debug.WriteLine(item.SelectToken("Last").ToString)
