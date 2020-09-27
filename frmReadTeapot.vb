@@ -11,7 +11,8 @@ Public Class frmReadTeapot
       Dim response As HttpWebResponse = Nothing
       Dim reader As StreamReader
       Dim RawResponse As String
-      Dim jO As Object
+      Dim jsonObject As Newtonsoft.Json.Linq.JObject
+      Dim jsonArray As JArray
 
       Try
 
@@ -24,7 +25,12 @@ Public Class frmReadTeapot
          RawResponse = reader.ReadToEnd()
          RawResponse = RawResponse
 
-         jO = JObject.Parse(RawResponse)
+         jsonObject = Newtonsoft.Json.Linq.JObject.Parse(RawResponse)
+         jsonArray = CType(jsonObject("obs"), JArray)
+
+         For Each item As JObject In jsonArray
+            Debug.WriteLine(item.SelectToken("Last").ToString)
+         Next
 
       Catch ex As Exception
          Console.WriteLine(ex.ToString)
